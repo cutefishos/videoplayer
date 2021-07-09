@@ -220,21 +220,21 @@ MpvObject {
             if (!playList.canToggleWithMouse || playList.playlistView.count <= 1) {
                 return
             }
-            if (playList.position === "right") {
-                if (mouseX > width - 50) {
-                    playList.state = "visible"
-                }
-                if (mouseX < width - playList.width - 20) {
-                    playList.state = "hidden"
-                }
-            } else {
-                if (mouseX < 50) {
-                    playList.state = "visible"
-                }
-                if (mouseX > playList.width + 20) {
-                    playList.state = "hidden"
-                }
-            }
+//            if (playList.position === "right") {
+//                if (mouseX > width - 50) {
+//                    playList.state = "visible"
+//                }
+//                if (mouseX < width - playList.width - 20) {
+//                    playList.state = "hidden"
+//                }
+//            } else {
+//                if (mouseX < 50) {
+//                    playList.state = "visible"
+//                }
+//                if (mouseX > playList.width + 20) {
+//                    playList.state = "hidden"
+//                }
+//            }
         }
 
         onWheel: {
@@ -251,6 +251,10 @@ MpvObject {
 
         onPressed: {
             focus = true
+
+            // Hide play list
+            playList.state = "hidden"
+
             if (mouse.button === Qt.LeftButton) {
                 if (MouseSettings.left) {
                     actions[MouseSettings.left].trigger()

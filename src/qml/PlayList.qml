@@ -18,7 +18,8 @@ Item {
 
     property alias scrollPositionTimer: scrollPositionTimer
     property alias playlistView: playlistView
-    property bool canToggleWithMouse: PlaylistSettings.canToggleWithMouse
+    // property bool canToggleWithMouse: PlaylistSettings.canToggleWithMouse
+    property bool canToggleWithMouse: true
     property string position: PlaylistSettings.position
     property int rowHeight: PlaylistSettings.rowHeight
     property int bigFont: PlaylistSettings.bigFontFullscreen
@@ -50,13 +51,10 @@ Item {
             id: playlistView
             model: mpv.playlistModel
             spacing: 1
-            delegate: playListItemSimple
+            delegate: PlayListItem {
+                onDoubleClicked: root.state = "hidden"
+            }
         }
-    }
-
-    Component {
-        id: playListItemSimple
-        PlayListItem {}
     }
 
     Timer {

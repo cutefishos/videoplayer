@@ -23,6 +23,8 @@ Item {
     height: label.font.pointSize * 3 + PlaylistSettings.rowHeight
     width: ListView.view.width
 
+    signal doubleClicked()
+
     Rectangle {
         anchors.fill: parent
         color: FishUI.Theme.backgroundColor
@@ -33,6 +35,8 @@ Item {
         anchors.fill: parent
         acceptedButtons: Qt.LeftButton
         onDoubleClicked: {
+            root.doubleClicked()
+
             mpv.playlistModel.setPlayingVideo(index)
             mpv.loadFile(path, !isYouTubePlaylist)
             mpv.pause = false

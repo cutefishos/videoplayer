@@ -29,7 +29,7 @@ QtObject {
     property Action togglePlaylistAction: Action {
         id: togglePlaylistAction
         property var qaction: app.action("togglePlaylist")
-        text: qaction.text
+        // text: qaction.text
         shortcut: qaction.shortcutName
         icon.name: qaction.iconName()
 

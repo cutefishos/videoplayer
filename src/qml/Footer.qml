@@ -25,8 +25,8 @@ Item {
     property alias volume: volume
 
     height: mainLayout.childrenRect.height + FishUI.Units.largeSpacing * 2
-    visible: mpv.mouseY > window.height - footer.height - FishUI.Units.largeSpacing * 3
-    opacity: visible ? 1 : 0
+    visible: true
+    opacity: mpv.mouseY > window.height - footer.height - FishUI.Units.largeSpacing * 3 ? 1 : 0
 
     Behavior on opacity {
         NumberAnimation {
@@ -91,26 +91,6 @@ Item {
         RowLayout {
             id: footerRow
 
-    //        ToolButton {
-    //            icon.name: "application-menu"
-    //            visible: !menuBar.visible
-    //            focusPolicy: Qt.NoFocus
-    //            onClicked: {
-    //                if (mpvContextMenu.visible) {
-    //                    return
-    //                }
-
-    //                mpvContextMenu.visible = !mpvContextMenu.visible
-    //                const menuHeight = mpvContextMenu.count * mpvContextMenu.itemAt(0).height
-    //                mpvContextMenu.popup(footer, 0, -menuHeight)
-    //            }
-    //        }
-
-            Loader {
-                sourceComponent: togglePlaylistButton
-                visible: !PlaylistSettings.canToggleWithMouse && PlaylistSettings.position === "left"
-            }
-
             ToolButton {
                 id: playPreviousFile
                 action: actions.playPreviousAction
@@ -174,7 +154,7 @@ Item {
 
             Loader {
                 sourceComponent: togglePlaylistButton
-                visible: !PlaylistSettings.canToggleWithMouse && PlaylistSettings.position === "right"
+                visible: true
             }
         }
     }
