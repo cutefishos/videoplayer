@@ -1,14 +1,70 @@
-# C++ objects and libs
+#
+# SPDX-FileCopyrightText: 2020 George Florea Bănuș <georgefb899@gmail.com>
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+
+# Created by https://www.gitignore.io/api/qt,c++,qml,cmake,qtcreator
+# Edit at https://www.gitignore.io/?templates=qt,c++,qml,cmake,qtcreator
+
+### C++ ###
+# Prerequisites
+*.d
+
+# Compiled Object files
 *.slo
 *.lo
 *.o
-*.a
-*.la
-*.lai
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
 *.so
-*.so.*
-*.dll
 *.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+### CMake ###
+CMakeLists.txt.user
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps
+
+### CMake Patch ###
+# External projects
+*-prefix/
+
+### QML ###
+# Cached binary representations of QML and JS files
+*.qmlc
+*.jsc
+
+### Qt ###
+# C++ objects and libs
 
 # Qt-es
 object_script.*.Release
@@ -25,12 +81,8 @@ moc_*.cpp
 moc_*.h
 qrc_*.cpp
 ui_*.h
-*.qmlc
-*.jsc
 Makefile*
 *build-*
-*.qm
-*.prl
 
 # Qt unit tests
 target_wrapper.*
@@ -45,8 +97,31 @@ target_wrapper.*
 # QtCreator CMake
 CMakeLists.txt.user*
 
-# QtCreator 4.8< compilation database 
-compile_commands.json
-
 # QtCreator local machine specific files for imported projects
 *creator.user*
+
+# A listing of all the files included in the project
+*.files
+
+# Include directories
+*.includes
+
+# Project configuration settings like predefined Macros
+*.config
+
+# Qt Creator settings
+*.creator
+
+# User project settings
+*.creator.user*
+
+/build*/
+cmake-build-debug*
+.idea
+/compile_commands.json
+.clangd
+.cache
+.clang-format
+.vscode
+
+
