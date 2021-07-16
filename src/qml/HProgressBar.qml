@@ -104,10 +104,10 @@ Slider {
                 progressBarToolTip.text = app.formatTime(time)
             }
 
-            onEntered: {
-                progressBarToolTip.x = mouseX - (progressBarToolTip.width * 0.5)
-                progressBarToolTip.y = root.height
-            }
+            // onEntered: {
+            //     progressBarToolTip.x = mouseX - (progressBarToolTip.width * 0.5)
+            //     progressBarToolTip.y = root.height
+            // }
 
             onWheel: {
                 if (wheel.angleDelta.y > 0) {
@@ -221,11 +221,16 @@ Slider {
 
     Connections {
         target: mpv
-        onFileLoaded: chapters = mpv.getProperty("chapter-list")
-        onChapterChanged: {
+
+        function onFileLoaded() {
+            chapters = mpv.getProperty("chapter-list")
+        }
+
+        function onChapterChanged() {
             chaptersMenu.checkedItem = mpv.chapter
         }
-        onPositionChanged: {
+
+        function onPositionChanged() {
             if (!root.seekStarted) {
                 root.value = mpv.position
             }

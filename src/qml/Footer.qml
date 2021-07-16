@@ -26,7 +26,9 @@ Item {
 
     height: mainLayout.childrenRect.height + FishUI.Units.largeSpacing * 2
     visible: true
-    opacity: mpv.mouseY > window.height - footer.height - FishUI.Units.largeSpacing * 3 ? 1 : 0
+    opacity: mpv.mouseY > window.height - footer.height - FishUI.Units.largeSpacing * 3
+                        && playList.state === "hidden" ? 1 : 0
+    enabled: opacity !== 0
 
     Behavior on opacity {
         NumberAnimation {
@@ -128,14 +130,10 @@ Item {
                 }
             }
 
-            LabelWithTooltip {
+            Label {
                 id: timeInfo
-
                 text: app.formatTime(mpv.position) + " / " + app.formatTime(mpv.duration)
                 font.pointSize: FishUI.Units.gridUnit - 4
-                toolTipText: qsTr("Remaining: ") + app.formatTime(mpv.remaining)
-                toolTipFontSize: timeInfo.font.pointSize + 2
-                alwaysShowToolTip: true
                 horizontalAlignment: Qt.AlignHCenter
             }
 

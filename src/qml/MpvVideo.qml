@@ -310,17 +310,38 @@ MpvObject {
     Connections {
         target: mediaPlayer2Player
 
-        onPlaypause: actions.playPauseAction.trigger()
-        onPlay: root.pause = false
-        onPause: root.pause = true
-        onStop: {
+        function onPlaypause() {
+            actions.playPauseAction.trigger()
+        }
+
+        function onPlay() {
+            root.pause = false
+        }
+
+        function onPause() {
+            root.pause = true
+        }
+
+        function onStop() {
             root.position = 0
             root.pause = true
         }
-        onNext: actions.playNextAction.trigger()
-        onPrevious: actions.playPreviousAction.trigger()
-        onSeek: root.command(["add", "time-pos", offset])
-        onOpenUri: openFile(uri, false, false)
+
+        function onNext() {
+            actions.playNextAction.trigger()
+        }
+
+        function onPrevious() {
+            actions.playPreviousAction.trigger()
+        }
+
+        function onSeek() {
+            root.command(["add", "time-pos", offset])
+        }
+
+        function onOpenUri() {
+            root.command(["add", "time-pos", offset])
+        }
     }
 
     Rectangle {

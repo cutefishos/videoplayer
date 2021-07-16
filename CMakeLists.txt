@@ -72,9 +72,9 @@ find_package(KF5KIO)
 set_package_properties(KF5KIO PROPERTIES TYPE REQUIRED
     URL "https://api.kde.org/frameworks/kio/html/index.html")
 
-find_package(KF5Kirigami2)
-set_package_properties(KF5Kirigami2 PROPERTIES TYPE REQUIRED
-    URL "https://api.kde.org/frameworks/kirigami/html/index.html")
+#find_package(KF5Kirigami2)
+#set_package_properties(KF5Kirigami2 PROPERTIES TYPE REQUIRED
+#    URL "https://api.kde.org/frameworks/kirigami/html/index.html")
 
 find_package(KF5XmlGui)
 set_package_properties(KF5XmlGui PROPERTIES TYPE REQUIRED

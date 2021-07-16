@@ -9,7 +9,7 @@ import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 import QtQml 2.12
 
-import org.kde.kirigami 2.11 as Kirigami
+import FishUI 1.0 as FishUI
 import org.kde.haruna 1.0
 
 import "Menus"
@@ -55,7 +55,7 @@ ToolBar {
             contentItem: Rectangle {
                 implicitWidth: parent.vertical ? 1 : 24
                 implicitHeight: parent.vertical ? 24 : 1
-                color: Kirigami.Theme.textColor
+                color: FishUI.Theme.textColor
             }
         }
 

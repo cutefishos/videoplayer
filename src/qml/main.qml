@@ -45,7 +45,7 @@ FishUI.Window {
 
     contentTopMargin: 0
 
-    // header: Header { id: header }
+    Header { id: header }
 
     // menuBar: MenuBar {
     //     hoverEnabled: true
