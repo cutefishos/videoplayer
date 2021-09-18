@@ -40,10 +40,6 @@ find_package(Libmpv)
 set_package_properties(Libmpv PROPERTIES TYPE REQUIRED
     URL "https://mpv.io")
 
-find_package(Breeze)
-set_package_properties(Breeze PROPERTIES TYPE RECOMMENDED
-    URL "https://api.kde.org/frameworks/breeze-icons/html/index.html")
-
 find_package(KF5Config)
 set_package_properties(KF5Config PROPERTIES TYPE REQUIRED
     URL "https://api.kde.org/frameworks/kconfig/html/index.html")
@@ -59,14 +55,6 @@ set_package_properties(KF5DocTools PROPERTIES
 find_package(KF5FileMetaData)
 set_package_properties(KF5FileMetaData PROPERTIES TYPE REQUIRED
     URL "https://api.kde.org/frameworks/kfilemetadata/html/index.html")
-
-find_package(KF5I18n)
-set_package_properties(KF5I18n PROPERTIES TYPE REQUIRED
-    URL "https://api.kde.org/frameworks/ki18n/html/index.html")
-
-find_package(KF5IconThemes)
-set_package_properties(KF5IconThemes PROPERTIES TYPE REQUIRED
-    URL "https://api.kde.org/frameworks/kiconthemes/html/index.html")
 
 find_package(KF5KIO)
 set_package_properties(KF5KIO PROPERTIES TYPE REQUIRED

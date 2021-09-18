@@ -55,8 +55,6 @@ target_link_libraries(cutefish-videoplayer PRIVATE
     KF5::CoreAddons
     KF5::DocTools
     KF5::FileMetaData
-    KF5::I18n
-    KF5::IconThemes
     KF5::KIOCore
     KF5::KIOFileWidgets
     KF5::KIOWidgets

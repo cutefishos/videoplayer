@@ -98,9 +98,9 @@ FishUI.Window {
         anchors.right: parent.right
         anchors.bottom: mpv.bottom
 
-        anchors.leftMargin: FishUI.Units.largeSpacing * 2
-        anchors.rightMargin: FishUI.Units.largeSpacing * 2
-        anchors.bottomMargin: FishUI.Units.largeSpacing * 2
+//        anchors.leftMargin: FishUI.Units.largeSpacing * 2
+//        anchors.rightMargin: FishUI.Units.largeSpacing * 2
+//        anchors.bottomMargin: FishUI.Units.largeSpacing * 2
     }
 
     Instantiator {

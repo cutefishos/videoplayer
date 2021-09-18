@@ -22,28 +22,28 @@ Kirigami.ScrollablePage {
     actions {
         contextualActions: [
             Kirigami.Action {
-                text: i18n("Help!")
+                text: qsTr("Help!")
                 iconName: "system-help"
                 Kirigami.Action {
-                    text: i18n("Haruna help window (english only)")
+                    text: qsTr("Haruna help window (english only)")
                     enabled: root.hasHelp
                     onTriggered: root.hasHelp ? helpWindow.show() : undefined
                 }
                 Kirigami.Action {
-                    text: i18n("KHelpCenter")
+                    text: qsTr("KHelpCenter")
                     enabled: root.docPage !== ""
                     onTriggered: enabled ? app.openDocs(root.docPage) : undefined
                 }
             },
             Kirigami.Action {
-                text: i18n("Open config ...")
+                text: qsTr("Open config ...")
                 iconName: "folder"
                 Kirigami.Action {
-                    text: i18n("File")
+                    text: qsTr("File")
                     onTriggered: Qt.openUrlExternally(app.configFilePath)
                 }
                 Kirigami.Action {
-                    text: i18n("Folder")
+                    text: qsTr("Folder")
                     onTriggered: Qt.openUrlExternally(app.configFolderPath)
                 }
             }

@@ -24,11 +24,12 @@ Item {
     property alias playPauseButton: playPauseButton
     property alias volume: volume
 
-    height: mainLayout.childrenRect.height + FishUI.Units.largeSpacing * 2
-    visible: true
+    height: progressBar.height + 50 + FishUI.Units.smallSpacing
+//    height: mainLayout.childrenRect.height + FishUI.Units.smallSpacing
     opacity: mpv.mouseY > window.height - footer.height - FishUI.Units.largeSpacing * 3
                         && playList.state === "hidden" ? 1 : 0
     enabled: opacity !== 0
+    visible: true
 
     Behavior on opacity {
         NumberAnimation {
@@ -58,18 +59,18 @@ Item {
         opacity: 0.8
     }
 
-    layer.enabled: true
-    layer.effect: OpacityMask {
-        maskSource: Item {
-            width: root.width
-            height: root.height
+//    layer.enabled: true
+//    layer.effect: OpacityMask {
+//        maskSource: Item {
+//            width: root.width
+//            height: root.height
 
-            Rectangle {
-                anchors.fill: parent
-                radius: FishUI.Theme.bigRadius
-            }
-        }
-    }
+//            Rectangle {
+//                anchors.fill: parent
+//                radius: FishUI.Theme.bigRadius
+//            }
+//        }
+//    }
 
     Component {
         id: togglePlaylistButton
@@ -82,8 +83,9 @@ Item {
     ColumnLayout {
         id: mainLayout
         anchors.fill: parent
-        anchors.margins: FishUI.Units.largeSpacing
-        spacing: FishUI.Units.largeSpacing
+        anchors.topMargin: 0
+        anchors.bottomMargin: FishUI.Units.smallSpacing
+        spacing: FishUI.Units.smallSpacing
 
         HProgressBar {
             id: progressBar
@@ -93,66 +95,114 @@ Item {
         RowLayout {
             id: footerRow
 
-            ToolButton {
-                id: playPreviousFile
-                action: actions.playPreviousAction
-                text: ""
-                focusPolicy: Qt.NoFocus
-                enabled: playList.playlistView.count > 1
+            Item {
+                width: FishUI.Units.smallSpacing
+            }
 
-                ToolTip {
-                    text: qsTr("Play previous file")
+            Item {
+                id: leftItem
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+
+                RowLayout {
+                    anchors.fill: parent
+
+                    Label {
+                        id: timeInfo
+                        text: app.formatTime(mpv.position) + " / " + app.formatTime(mpv.duration)
+                        font.pointSize: FishUI.Units.gridUnit - 6
+                        Layout.alignment: Qt.AlignVCenter
+                    }
                 }
             }
 
-            ToolButton {
-                id: playPauseButton
-                action: actions.playPauseAction
-                text: ""
-                icon.name: "media-playback-start"
-                focusPolicy: Qt.NoFocus
+            Item {
+                id: middleItem
+                Layout.preferredWidth: middleLayout.childrenRect.width
+                Layout.fillHeight: true
 
-                ToolTip {
-                    id: playPauseButtonToolTip
-                    text: mpv.pause ? qsTr("Start Playback") : qsTr("Pause Playback")
+                RowLayout {
+                    id: middleLayout
+                    anchors.fill: parent
+
+                    ToolButton {
+                        id: playPreviousFile
+                        action: actions.playPreviousAction
+                        text: ""
+                        focusPolicy: Qt.NoFocus
+                        enabled: playList.playlistView.count > 1
+
+                        ToolTip {
+                            text: qsTr("Play previous file")
+                        }
+                    }
+
+                    ToolButton {
+                        id: playPauseButton
+                        action: actions.playPauseAction
+                        text: ""
+                        icon.name: "media-playback-start"
+                        focusPolicy: Qt.NoFocus
+
+                        ToolTip {
+                            id: playPauseButtonToolTip
+                            text: mpv.pause ? qsTr("Start Playback") : qsTr("Pause Playback")
+                        }
+                    }
+
+                    ToolButton {
+                        id: playNextFile
+                        action: actions.playNextAction
+                        text: ""
+                        focusPolicy: Qt.NoFocus
+                        enabled: playList.playlistView.count > 1
+
+                        ToolTip {
+                            text: qsTr("Play next file")
+                        }
+                    }
                 }
             }
 
-            ToolButton {
-                id: playNextFile
-                action: actions.playNextAction
-                text: ""
-                focusPolicy: Qt.NoFocus
-                enabled: playList.playlistView.count > 1
+            Item {
+                id: rightItem
+                Layout.fillWidth: true
+                Layout.fillHeight: true
 
-                ToolTip {
-                    text: qsTr("Play next file")
+                RowLayout {
+                    anchors.fill: parent
+                    spacing: FishUI.Units.smallSpacing
+
+                    Item {
+                        Layout.fillWidth: true
+                    }
+
+                    ToolButton {
+                        id: mute
+                        action: actions.muteAction
+                        text: ""
+                        focusPolicy: Qt.NoFocus
+
+                        ToolTip {
+                            text: actions.muteAction.text
+                        }
+                    }
+
+                    VolumeSlider { id: volume }
+
+                    Item {
+                        width: 1
+                    }
+
+                    Loader {
+                        sourceComponent: togglePlaylistButton
+                        visible: true
+                    }
+
+                    Item {
+                        width: FishUI.Units.smallSpacing
+                    }
                 }
-            }
-
-            Label {
-                id: timeInfo
-                text: app.formatTime(mpv.position) + " / " + app.formatTime(mpv.duration)
-                font.pointSize: FishUI.Units.gridUnit - 4
-                horizontalAlignment: Qt.AlignHCenter
-            }
-
-            ToolButton {
-                id: mute
-                action: actions.muteAction
-                text: ""
-                focusPolicy: Qt.NoFocus
-
-                ToolTip {
-                    text: actions.muteAction.text
-                }
-            }
-
-            VolumeSlider { id: volume }
-
-            Loader {
-                sourceComponent: togglePlaylistButton
-                visible: true
             }
         }
     }

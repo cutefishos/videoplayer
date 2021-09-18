@@ -7,8 +7,6 @@
 #include "lockmanager.h"
 #include "screensaverdbusinterface.h"
 
-#include <KLocalizedString>
-
 #include <QDBusConnection>
 
 LockManager::LockManager(QObject *parent)
@@ -31,5 +29,5 @@ void LockManager::setInhibitionOn()
 {
     m_cookie = m_iface->Inhibit(
                 QStringLiteral("Haruna Video Player"),
-                i18n("Playing video."));
+                tr("Playing video."));
 }

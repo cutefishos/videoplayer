@@ -27,7 +27,7 @@ SettingsBasePage {
 
         // OSD Font Size
         Label {
-            text: i18n("Osd font size")
+            text: qsTr("Osd font size")
             Layout.alignment: Qt.AlignRight
         }
 
@@ -58,7 +58,7 @@ SettingsBasePage {
 
         // Volume Step
         Label {
-            text: i18n("Volume step")
+            text: qsTr("Volume step")
             Layout.alignment: Qt.AlignRight
         }
 
@@ -82,7 +82,7 @@ SettingsBasePage {
 
         // Seek Small Step
         Label {
-            text: i18n("Seek small step")
+            text: qsTr("Seek small step")
             Layout.alignment: Qt.AlignRight
         }
 
@@ -104,7 +104,7 @@ SettingsBasePage {
 
         // Seek Medium Step
         Label {
-            text: i18n("Seek medium step")
+            text: qsTr("Seek medium step")
             Layout.alignment: Qt.AlignRight
         }
 
@@ -130,7 +130,7 @@ SettingsBasePage {
                     checked: false
 
                     ToolTip {
-                        text: i18n("This is also used for mouse wheel seeking, when mouse is over the progress bar")
+                        text: qsTr("This is also used for mouse wheel seeking, when mouse is over the progress bar")
                         visible: parent.checked
                         delay: 0
                         timeout: -1
@@ -144,7 +144,7 @@ SettingsBasePage {
 
         // Seek Big Step
         Label {
-            text: i18n("Seek big step")
+            text: qsTr("Seek big step")
             Layout.alignment: Qt.AlignRight
         }
 
@@ -165,7 +165,7 @@ SettingsBasePage {
         }
 
         Label {
-            text: i18n("File dialog location")
+            text: qsTr("File dialog location")
             Layout.alignment: Qt.AlignRight
         }
 
@@ -183,19 +183,19 @@ SettingsBasePage {
                 }
 
                 ToolTip {
-                    text: i18n("If empty the file dialog will remember the last opened location.")
+                    text: qsTr("If empty the file dialog will remember the last opened location.")
                 }
             }
         }
 
         SettingsHeader {
-            text: i18n("Interface")
+            text: qsTr("Interface")
             Layout.columnSpan: 2
             Layout.fillWidth: true
         }
 
         CheckBox {
-            text: i18n("Show MenuBar")
+            text: qsTr("Show MenuBar")
             checked: GeneralSettings.showMenuBar
             onCheckedChanged: {
                 GeneralSettings.showMenuBar = checked
@@ -206,7 +206,7 @@ SettingsBasePage {
         }
 
         CheckBox {
-            text: i18n("Show Header")
+            text: qsTr("Show Header")
             checked: GeneralSettings.showHeader
             onCheckedChanged: {
                 GeneralSettings.showHeader = checked
@@ -217,7 +217,7 @@ SettingsBasePage {
         }
 
         CheckBox {
-            text: i18n("Show chapter markers")
+            text: qsTr("Show chapter markers")
             checked: GeneralSettings.showChapterMarkers
             onCheckedChanged: {
                 GeneralSettings.showChapterMarkers = checked
@@ -228,7 +228,7 @@ SettingsBasePage {
         }
 
         Label {
-            text: i18n("Color scheme")
+            text: qsTr("Color scheme")
             Layout.alignment: Qt.AlignRight
         }
 
@@ -265,7 +265,7 @@ SettingsBasePage {
         }
 
         Label {
-            text: i18n("GUI Style")
+            text: qsTr("GUI Style")
             Layout.alignment: Qt.AlignRight
         }
 
@@ -314,7 +314,7 @@ SettingsBasePage {
         }
 
         CheckBox {
-            text: i18n("Use Breeze icon theme")
+            text: qsTr("Use Breeze icon theme")
             checked: GeneralSettings.useBreezeIconTheme
             onCheckedChanged: {
                 GeneralSettings.useBreezeIconTheme = checked
@@ -324,7 +324,7 @@ SettingsBasePage {
             Layout.column: 1
 
             ToolTip {
-                text: i18n("Sets the icon theme to breeze.\nRequires restart.")
+                text: qsTr("Sets the icon theme to breeze.\nRequires restart.")
             }
         }
 

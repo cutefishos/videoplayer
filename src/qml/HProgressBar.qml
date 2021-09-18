@@ -24,7 +24,7 @@ Slider {
     from: 0
     to: mpv.duration
     implicitWidth: 200
-    implicitHeight: 20
+    implicitHeight: 10
     leftPadding: 0
     rightPadding: 0
 
@@ -34,18 +34,18 @@ Slider {
         id: progressBarBackground
         color: FishUI.Theme.alternateBackgroundColor
 
-        layer.enabled: true
-        layer.effect: OpacityMask {
-            maskSource: Item {
-                width: progressBarBackground.width
-                height: progressBarBackground.height
+//        layer.enabled: true
+//        layer.effect: OpacityMask {
+//            maskSource: Item {
+//                width: progressBarBackground.width
+//                height: progressBarBackground.height
 
-                Rectangle {
-                    anchors.fill: parent
-                    radius: FishUI.Theme.smallRadius
-                }
-            }
-        }
+//                Rectangle {
+//                    anchors.fill: parent
+//                    radius: FishUI.Theme.smallRadius
+//                }
+//            }
+//        }
 
         Rectangle {
             id: loopIndicator
@@ -189,7 +189,7 @@ Slider {
 
         MenuItem {
             id: skipChaptersMenuItem
-            text: i18n("Skip Chapters")
+            text: qsTr("Skip Chapters")
             checkable: true
             checked: PlaybackSettings.skipChapters
             onCheckedChanged: {

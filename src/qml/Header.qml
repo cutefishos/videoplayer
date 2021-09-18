@@ -64,7 +64,7 @@ ToolBar {
 
             property var model: 0
 
-            text: i18n("Subtitles")
+            text: qsTr("Subtitles")
             icon.name: "add-subtitle"
             focusPolicy: Qt.NoFocus
 
@@ -84,7 +84,7 @@ ToolBar {
                 Menu {
                     id: secondarySubtitleMenu
 
-                    title: i18n("Secondary Subtitle")
+                    title: qsTr("Secondary Subtitle")
 
                     Instantiator {
                         id: secondarySubtitleMenuInstantiator
@@ -104,7 +104,7 @@ ToolBar {
                 MenuSeparator {}
 
                 MenuItem {
-                    text: i18n("Primary Subtitle")
+                    text: qsTr("Primary Subtitle")
                     hoverEnabled: false
                 }
 
@@ -125,7 +125,7 @@ ToolBar {
         }
 
         ToolButton {
-            text: i18n("Audio")
+            text: qsTr("Audio")
             icon.name: "audio-volume-high"
             focusPolicy: Qt.NoFocus
 
