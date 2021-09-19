@@ -17,7 +17,7 @@ sudo apt install extra-cmake-modules qtbase5-dev qtdeclarative5-dev qtquickcontr
 ```
 mkdir build
 cd build
-cmake ..
+cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr ..
 make
 sudo make install
 ```

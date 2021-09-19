@@ -67,6 +67,7 @@ Application::Application(int &argc, char **argv, const QString &applicationName)
     std::setlocale(LC_NUMERIC, "C");
 
     m_engine = new QQmlApplicationEngine(this);
+    setupCommandLineParser();
     registerQmlTypes();
     setupQmlContextProperties();
 

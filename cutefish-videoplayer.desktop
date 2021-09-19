@@ -1,5 +1,6 @@
 [Desktop Entry]
-Name=Cutefish Video Player
+Name=Video Player
+Name[zh_CN]=视频播放器
 Exec=cutefish-videoplayer %u
 Icon=cutefish-videoplayer
 Type=Application
