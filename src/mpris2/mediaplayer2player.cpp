@@ -5,8 +5,7 @@
  */
 
 #include "mediaplayer2player.h"
-#include "_debug.h"
-#include "mpvobject.h"
+#include "../mpvobject.h"
 
 #include <QDBusConnection>
 #include <QDBusMessage>
@@ -125,7 +124,7 @@ QVariantMap MediaPlayer2Player::Metadata()
     metadata.insert(QStringLiteral("mpris:length"),
                     m_mpv->getProperty("duration").toDouble() * 1000 * 1000);
     metadata.insert(QStringLiteral("mpris:trackid"),
-                    QVariant::fromValue<QDBusObjectPath>(QDBusObjectPath("/org/kde/haruna")));
+                    QVariant::fromValue<QDBusObjectPath>(QDBusObjectPath("/com/cutefish/videoplayer")));
     metadata.insert(QStringLiteral("xesam:title"),
                     m_mpv->getProperty("filename").toString());
     QUrl url(m_mpv->getProperty("path").toString());

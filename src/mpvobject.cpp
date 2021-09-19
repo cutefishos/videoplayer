@@ -4,17 +4,13 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#include "_debug.h"
 #include "mpvobject.h"
 #include "application.h"
-#include "generalsettings.h"
-#include "playbacksettings.h"
-#include "videosettings.h"
 #include "playlistitem.h"
 #include "track.h"
 #include "tracksmodel.h"
-#include "global.h"
 
+#include <QSettings>
 #include <QCryptographicHash>
 #include <QDir>
 #include <QJsonArray>
@@ -27,8 +23,6 @@
 #include <QQuickWindow>
 #include <QStandardPaths>
 #include <QtGlobal>
-
-#include <KShell>
 
 void on_mpv_redraw(void *ctx)
 {
@@ -110,9 +104,9 @@ MpvObject::MpvObject(QQuickItem * parent)
 //    setProperty("terminal", "yes");
 //    setProperty("msg-level", "all=v");
 
-    QString hwdec = PlaybackSettings::useHWDecoding() ? PlaybackSettings::hWDecoding() : "no";
-    setProperty("hwdec", hwdec);
-    setProperty("screenshot-template", VideoSettings::screenshotTemplate());
+//    QString hwdec = PlaybackSettings::useHWDecoding() ? PlaybackSettings::hWDecoding() : "no";
+    setProperty("hwdec", "auto");
+//    setProperty("screenshot-template", VideoSettings::screenshotTemplate());
     setProperty("sub-auto", "exact");
     setProperty("volume-max", "100");
 
@@ -137,17 +131,17 @@ MpvObject::MpvObject(QQuickItem * parent)
 
 
     // run user commands
-    KSharedConfig::Ptr m_customPropsConfig;
-    QString ccConfig = Global::instance()->appConfigFilePath(Global::ConfigFile::CustomCommands);
-    m_customPropsConfig = KSharedConfig::openConfig(ccConfig, KConfig::SimpleConfig);
-    QStringList groups = m_customPropsConfig->groupList();
-    for (const QString &_group : qAsConst((groups))) {
-        auto configGroup = m_customPropsConfig->group(_group);
-        QString type = configGroup.readEntry("Type", QString());
-        if (type == "startup") {
-            userCommand(configGroup.readEntry("Command", QString()));
-        }
-    }
+//    KSharedConfig::Ptr m_customPropsConfig;
+//    QString ccConfig = Global::instance()->appConfigFilePath(Global::ConfigFile::CustomCommands);
+//    m_customPropsConfig = KSharedConfig::openConfig(ccConfig, KConfig::SimpleConfig);
+//    QStringList groups = m_customPropsConfig->groupList();
+//    for (const QString &_group : qAsConst((groups))) {
+//        auto configGroup = m_customPropsConfig->group(_group);
+//        QString type = configGroup.readEntry("Type", QString());
+//        if (type == "startup") {
+//            userCommand(configGroup.readEntry("Command", QString()));
+//        }
+//    }
 
     mpv_set_wakeup_callback(mpv, MpvObject::mpvEvents, this);
 
@@ -391,18 +385,19 @@ QQuickFramebufferObject::Renderer *MpvObject::createRenderer() const
     return new MpvRenderer(const_cast<MpvObject *>(this));
 }
 
-void MpvObject::loadFile(const QString &file, bool updateLastPlayedFile)
+void MpvObject::loadFile(const QString &file)
 {
-    setProperty("ytdl-format", PlaybackSettings::ytdlFormat());
+//    setProperty("ytdl-format", PlaybackSettings::ytdlFormat());
+
     command(QStringList() << "loadfile" << file);
 
-    if (updateLastPlayedFile) {
-        GeneralSettings::setLastPlayedFile(file);
-        GeneralSettings::self()->save();
-    } else {
-        GeneralSettings::setLastPlaylistIndex(m_playlistModel->getPlayingVideo());
-        GeneralSettings::self()->save();
-    }
+//    if (updateLastPlayedFile) {
+//        GeneralSettings::setLastPlayedFile(file);
+//        GeneralSettings::self()->save();
+//    } else {
+//        GeneralSettings::setLastPlaylistIndex(m_playlistModel->getPlayingVideo());
+//        GeneralSettings::self()->save();
+//    }
 }
 
 void MpvObject::mpvEvents(void *ctx)
@@ -605,7 +600,7 @@ void MpvObject::getYouTubePlaylist(const QString &path)
             video->setMediaTitle(!title.isEmpty() ? title : url);
             video->setFileName(!title.isEmpty() ? title : url);
 
-            video->setDuration(Application::formatTime(duration));
+            // video->setDuration(Application::formatTime(duration));
             m_playList.append(video);
 
             playlistFileContent += QString("%1,%2,%3\n").arg(url, title, QString::number(duration));
@@ -622,7 +617,7 @@ int MpvObject::setProperty(const QString &name, const QVariant &value, bool debu
 {
     auto result = mpv::qt::set_property(mpv, name, value);
     if (debug) {
-        DEBUG << mpv::qt::get_error(result);
+        qDebug() << mpv::qt::get_error(result);
     }
     return result;
 }
@@ -631,7 +626,7 @@ QVariant MpvObject::getProperty(const QString &name, bool debug)
 {
     auto result = mpv::qt::get_property(mpv, name);
     if (debug) {
-        DEBUG << mpv::qt::get_error(result);
+        qDebug() << mpv::qt::get_error(result);
     }
     return result;
 }
@@ -644,58 +639,59 @@ QVariant MpvObject::command(const QVariant &params)
 void MpvObject::saveTimePosition()
 {
     // saving position is disabled
-    if (PlaybackSettings::minDurationToSavePosition() == -1) {
-        return;
-    }
+//    if (PlaybackSettings::minDurationToSavePosition() == -1) {
+//        return;
+//    }
+
     // position is saved only for files longer than PlaybackSettings::minDurationToSavePosition()
-    if (getProperty("duration").toInt() < PlaybackSettings::minDurationToSavePosition() * 60) {
+    if (getProperty("duration").toInt() < 60) {
         return;
     }
 
     auto hash = md5(getProperty("path").toString());
     auto timePosition = getProperty("time-pos");
-    auto configPath = Global::instance()->appConfigDirPath();
-    KConfig *config = new KConfig(configPath.append("/watch-later/").append(hash));
-    config->group("").writeEntry("TimePosition", timePosition);
-    config->sync();
+
+//    auto configPath = Global::instance()->appConfigDirPath();
+//    KConfig *config = new KConfig(configPath.append("/watch-later/").append(hash));
+//    config->group("").writeEntry("TimePosition", timePosition);
+//    config->sync();
 }
 
 double MpvObject::loadTimePosition()
 {
-    // saving position is disabled
-    if (PlaybackSettings::minDurationToSavePosition() == -1) {
-        return 0;
-    }
     // position is saved only for files longer than PlaybackSettings::minDurationToSavePosition()
     // but there can be cases when there is a saved position for files lower than minDurationToSavePosition()
     // when minDurationToSavePosition() was increased after position was already saved
-    if (getProperty("duration").toInt() < PlaybackSettings::minDurationToSavePosition() * 60) {
+    if (getProperty("duration").toInt() < 60) {
         return 0;
     }
 
-    auto hash = md5(getProperty("path").toString());
-    auto configPath = Global::instance()->appConfigDirPath();
-    KConfig *config = new KConfig(configPath.append("/watch-later/").append(hash));
-    int position = config->group("").readEntry("TimePosition", QString::number(0)).toDouble();
+//    auto hash = md5(getProperty("path").toString());
+//    QSettings settings("cutefishos", "cutefish-videoplayer");
+//    auto configPath = QFileInfo(settings.fileName()).absoluteDir();
+//    qDebug() << configPath;
+//    KConfig *config = new KConfig(configPath.append("/watch-later/").append(hash));
+//    QSettings set(configPath.append("/watch-later/"));
+//    int position = config->group("").readEntry("TimePosition", QString::number(0)).toDouble();
 
-    return position;
+    return 0;
 }
 
 void MpvObject::resetTimePosition()
 {
-    auto hash = md5(getProperty("path").toString());
-    auto configPath = Global::instance()->appConfigDirPath();
-    QFile f(configPath.append("/watch-later/").append(hash));
+//    auto hash = md5(getProperty("path").toString());
+//    auto configPath = Global::instance()->appConfigDirPath();
+//    QFile f(configPath.append("/watch-later/").append(hash));
 
-    if (f.exists()) {
-        f.remove();
-    }
+//    if (f.exists()) {
+//        f.remove();
+//    }
 }
 
 void MpvObject::userCommand(const QString &commandString)
 {
-    QStringList args = KShell::splitArgs(commandString);
-    command(args);
+    // QStringList args = KShell::splitArgs(commandString);
+    // command(args);
 }
 
 QString MpvObject::md5(const QString &str)

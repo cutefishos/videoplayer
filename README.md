@@ -2,46 +2,15 @@
 
 An open source video player built with Qt/QML and libmpv.
 
-Based on [haruna](https://github.com/g-fb/haruna)
+### Third Party Code
 
-# Features
+[haruna](https://github.com/g-fb/haruna)
 
-these are just some features that set Haruna apart from others players
+## Dependencies
 
-- play online videos, through youtube-dl
-
-- toggle playlist with mouse-over, playlist overlays the video
-
-- auto skip chapter containing certain words
-
-- configurable shortcuts and mouse buttons
-
-- quick jump to next chapter by middle click on progress bar
-
-# Dependencies
-
-### Build time
-- Qt5Core
-- Qt5DBus
-- Qt5Qml
-- Qt5Quick
-- Qt5QuickControls2
-- Libmpv
-- ExtraCmakeModules
-- KF5Config
-- KF5CoreAddons
-- KF5FileMetaData
-- KF5I18n
-- KF5IconThemes
-- KF5KIO
-- KF5XmlGui
-
-### Runtime
-- Kio-extras
-- Breeze icons
-- Breeze widgets style
-- QQC2-Desktop-Style
-- Youtube-dl
+```sh
+sudo apt install extra-cmake-modules qtbase5-dev qtdeclarative5-dev qtquickcontrols2-5-dev libmpv-dev
+```
 
 # Build and Install
 

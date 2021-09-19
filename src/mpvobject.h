@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SPDX-FileCopyrightText: 2020 George Florea Bănuș <georgefb899@gmail.com>
  *
  * SPDX-License-Identifier: GPL-3.0-or-later
@@ -11,6 +11,7 @@
 
 #include <mpv/client.h>
 #include <mpv/render_gl.h>
+
 #include "qthelper.h"
 #include "playlistmodel.h"
 #include "tracksmodel.h"
@@ -120,7 +121,7 @@ class MpvObject : public QQuickFramebufferObject
 
     bool pause();
     void setPause(bool value);
-    
+
     int volume();
     void setVolume(int value);
 
@@ -164,7 +165,7 @@ public:
     virtual ~MpvObject();
     virtual Renderer *createRenderer() const;
 
-    Q_INVOKABLE void loadFile(const QString &file, bool updateLastPlayedFile = true);
+    Q_INVOKABLE void loadFile(const QString &file);
     Q_INVOKABLE void getYouTubePlaylist(const QString &path);
     Q_INVOKABLE QVariant command(const QVariant &params);
     Q_INVOKABLE QVariant getProperty(const QString &name, bool debug = false);

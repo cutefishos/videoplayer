@@ -5,9 +5,7 @@
  */
 
 #include "mediaplayer2.h"
-#include "_debug.h"
 
-#include <KAboutData>
 #include <QApplication>
 
 MediaPlayer2::MediaPlayer2(QObject *obj)
@@ -42,12 +40,12 @@ bool MediaPlayer2::HasTrackList() const
 
 QString MediaPlayer2::Identity() const
 {
-    return QStringLiteral("Haruna");
+    return QStringLiteral("CutefishPlayer");
 }
 
 QString MediaPlayer2::DesktopEntry() const
 {
-    return KAboutData::applicationData().desktopFileName();
+    return "";
 }
 
 QStringList MediaPlayer2::SupportedUriSchemes() const

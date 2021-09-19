@@ -1,15 +1,12 @@
-/*
- * SPDX-FileCopyrightText: 2020 George Florea Bănuș <georgefb899@gmail.com>
- *
- * SPDX-License-Identifier: GPL-3.0-or-later
- */
-
 #include "application.h"
 
 int main(int argc, char *argv[])
 {
-    Application app(argc, argv, "Haruna");
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+#endif
+
+    Application app(argc, argv, "cutefish-videoplayer");
 
     return app.run();
 }
-
