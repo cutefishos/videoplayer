@@ -15,11 +15,11 @@ import mpv 1.0
 
 Item {
     id: control
-    height: mpv.height - FishUI.Units.largeSpacing * 6
+    height: mpv.height - FishUI.Units.largeSpacing * 2
     width: FishUI.Units.gridUnit * 16
     z: 9999
     x: parent.width
-    y: rootWindow.header.height + FishUI.Units.largeSpacing
+    y: FishUI.Units.largeSpacing
     state: "hidden"
 
     property string position: "right"

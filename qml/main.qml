@@ -23,11 +23,11 @@ FishUI.Window {
     minimumHeight: 450
     color: FishUI.Theme.backgroundColor
 
-    header.visible: mpv.mouseY >= 0 && mpv.mouseY <= header.height
+    header.visible: !rootWindow.isFullScreen()
     headerBackground.color: FishUI.Theme.secondBackgroundColor
-    headerBackground.opacity: 0.95
+    // headerBackground.opacity: 0.95
 
-    contentTopMargin: 0
+    contentTopMargin: header.visible ? header.height : 0
 
     property int preFullScreenVisibility
 
@@ -44,24 +44,25 @@ FishUI.Window {
             anchors.top: parent.top
             anchors.topMargin: FishUI.Units.smallSpacing * 1.5
             anchors.leftMargin: FishUI.Units.largeSpacing
-            text: mpv.mediaTitle
-            color: "white"
+            text: mpv.mediaTitle ? mpv.mediaTitle : qsTr("Video Player")
+//            color: "white"
+            color: FishUI.Theme.textColor
             z: 100
         }
 
-        DropShadow {
-            anchors.fill: headerLabel
-            source: headerLabel
-            z: -1
-            horizontalOffset: 1
-            verticalOffset: 1
-            radius: Math.round(6 * FishUI.Units.devicePixelRatio)
-            samples: radius * 2 + 1
-            spread: 0.35
-            color: Qt.rgba(0, 0, 0, 0.5)
-            opacity: 0.4
-            visible: true
-        }
+//        DropShadow {
+//            anchors.fill: headerLabel
+//            source: headerLabel
+//            z: -1
+//            horizontalOffset: 1
+//            verticalOffset: 1
+//            radius: Math.round(6 * FishUI.Units.devicePixelRatio)
+//            samples: radius * 2 + 1
+//            spread: 0.35
+//            color: Qt.rgba(0, 0, 0, 0.5)
+//            opacity: 0.4
+//            visible: true
+//        }
     }
 
     Actions {
@@ -70,7 +71,10 @@ FishUI.Window {
 
     MpvVideo {
         id: mpv
-        anchors.fill: parent
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.bottom: !rootWindow.isFullScreen() ? footer.top : parent.bottom
 
         Image {
             id: _logo
@@ -90,6 +94,13 @@ FishUI.Window {
             text: qsTr("Open")
             onClicked: fileDialog.open()
         }
+    }
+
+    Footer {
+        id: footer
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
     }
 
     Platform.FileDialog {
@@ -113,13 +124,6 @@ FishUI.Window {
 
     PlayList {
         id: playList
-    }
-
-    Footer {
-        id: footer
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.bottom: mpv.bottom
     }
 
     function openFile(path, startPlayback) {

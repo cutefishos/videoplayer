@@ -21,7 +21,10 @@ Item {
 
     height: mainLayout.childrenRect.height + FishUI.Units.smallSpacing
     enabled: opacity !== 0
-    visible: mpv.mouseY > rootWindow.height - footer.height && playList.state === "hidden"
+    // visible: mpv.mouseY > rootWindow.height - footer.height && playList.state === "hidden"
+
+    visible: rootWindow.isFullScreen() ? mpv.mouseY > rootWindow.height - rootWindow.header.height - 40
+                                       : true
 
     ShaderEffectSource {
         id: shaderEffect
@@ -63,7 +66,7 @@ Item {
 
             Item {
                 width: FishUI.Units.smallSpacing
-                height: 30
+                height: 40
             }
 
             Item {
