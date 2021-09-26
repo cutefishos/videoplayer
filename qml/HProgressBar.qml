@@ -176,7 +176,7 @@ Slider {
 
         MenuItem {
             id: skipChaptersMenuItem
-            text: qsTr("Skip Chapters")
+            // text: qsTr("Skip Chapters")
             checkable: true
             // checked: PlaybackSettings.skipChapters
             onCheckedChanged: {

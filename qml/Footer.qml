@@ -185,7 +185,7 @@ Item {
                         to: 100
                         value: mpv.volume
                         implicitWidth: 100
-                        implicitHeight: 25
+                        implicitHeight: 20
                         wheelEnabled: true
                         leftPadding: 0
                         rightPadding: 0

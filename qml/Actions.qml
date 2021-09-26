@@ -59,7 +59,6 @@ QtObject {
         onTriggered: {
             mpv.setProperty("mute", !mpv.getProperty("mute"))
             if (mpv.getProperty("mute")) {
-                text = qsTr("Unmute")
                 icon.name = "player-volume-muted"
             } /*else {
                 text = qaction.text
@@ -96,7 +95,6 @@ QtObject {
 
     property Action playPauseAction: Action {
         id: playPauseAction
-        text: qsTr("Play/Pause")
         icon.name: "media-playback-pause"
         shortcut: "Space"
 

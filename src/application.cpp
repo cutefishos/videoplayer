@@ -126,7 +126,7 @@ void Application::showCursor()
 void Application::setupCommandLineParser()
 {
     QCommandLineParser parser;
-    parser.addPositionalArgument(QStringLiteral("file"), tr("File to open"));
+    parser.addPositionalArgument(QStringLiteral("file"), "File to open");
     parser.process(*m_app);
 
     for (auto i = 0; i < parser.positionalArguments().size(); ++i) {
