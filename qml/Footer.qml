@@ -26,20 +26,20 @@ Item {
     visible: rootWindow.isFullScreen() ? mpv.mouseY > rootWindow.height - rootWindow.header.height - 40
                                        : true
 
-    ShaderEffectSource {
-        id: shaderEffect
-        visible: true
-        anchors.fill: parent
-        sourceItem: mpv
-        sourceRect: Qt.rect(0, 0, control.width, control.height)
-    }
+//    ShaderEffectSource {
+//        id: shaderEffect
+//        visible: true
+//        anchors.fill: parent
+//        sourceItem: mpv
+//        sourceRect: Qt.rect(0, 0, control.width, control.height)
+//    }
 
-    FastBlur {
-        visible: true
-        anchors.fill: shaderEffect
-        source: shaderEffect
-        radius: 100
-    }
+//    FastBlur {
+//        visible: true
+//        anchors.fill: shaderEffect
+//        source: shaderEffect
+//        radius: 100
+//    }
 
     Rectangle {
         id: _background

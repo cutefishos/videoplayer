@@ -134,13 +134,6 @@ MpvObject {
         mediaPlayer2Player.mpv = control
     }
 
-    // Window move
-    DragHandler {
-        acceptedDevices: PointerDevice.GenericPointer
-        grabPermissions: PointerHandler.CanTakeOverFromItems | PointerHandler.CanTakeOverFromHandlersOfDifferentType | PointerHandler.ApprovesTakeOverByAnything
-        onActiveChanged: if (active) rootWindow.helper.startSystemMove(rootWindow)
-    }
-
     MouseArea {
         id: mouseArea
         anchors.fill: parent
