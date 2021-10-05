@@ -44,7 +44,7 @@ Item {
     Rectangle {
         id: _background
         anchors.fill: parent
-        color: FishUI.Theme.backgroundColor
+        color: FishUI.Theme.secondBackgroundColor
         opacity: 0.7
     }
 

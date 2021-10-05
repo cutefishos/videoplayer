@@ -31,7 +31,7 @@ Slider {
 
     background: Rectangle {
         id: progressBarBackground
-        color: FishUI.Theme.alternateBackgroundColor
+        color: FishUI.Theme.darkMode ? "#3E3E40" : "#E6E6E6"
 
         Rectangle {
             id: loopIndicator
