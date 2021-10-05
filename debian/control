@@ -17,7 +17,8 @@ Homepage: https://cutefishos.com
 
 Package: cutefish-videoplayer
 Architecture: any
-Depends: qml-module-qtquick-controls2,
+Depends: fishui,
+         qml-module-qtquick-controls2,
          qml-module-qtquick2,
          qml-module-qtquick-layouts,
          qml-module-qt-labs-platform,
