@@ -1,5 +1,5 @@
 Source: cutefish-videoplayer
-Section: devel
+Section: video
 Priority: optional
 Maintainer: CutefishOS <support@cutefishos.com>
 Build-Depends: cmake,
@@ -29,4 +29,4 @@ Depends: qml-module-qtquick-controls2,
          qml-module-qtquick-particles2,
          ${misc:Depends},
          ${shlibs:Depends}
-Description: CutefishOS Settings
+Description: An open source video player built with Qt/QML and libmpv
