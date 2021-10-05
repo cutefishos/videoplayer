@@ -101,6 +101,11 @@ QtObject {
         Component.onCompleted: list["playPauseAction"] = playPauseAction
 
         onTriggered: {
+            if (playList.playlistView.count === 0) {
+                fileDialog.open()
+                return
+            }
+
             mpv.setProperty("pause", !mpv.getProperty("pause"))
         }
     }

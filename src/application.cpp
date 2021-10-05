@@ -37,6 +37,9 @@
 #include <QStyleFactory>
 #include <QThread>
 
+#include <QTranslator>
+#include <QLocale>
+
 #include <memory>
 
 static QApplication *createApplication(int &argc, char **argv, const QString &applicationName)
@@ -65,6 +68,18 @@ Application::Application(int &argc, char **argv, const QString &applicationName)
     // Qt sets the locale in the QGuiApplication constructor, but libmpv
     // requires the LC_NUMERIC category to be set to "C", so change it back.
     std::setlocale(LC_NUMERIC, "C");
+
+    // Translations
+    QLocale locale;
+    QString qmFilePath = QString("%1/%2.qm").arg("/usr/share/cutefish-videoplayer/translations/").arg(locale.name());
+    if (QFile::exists(qmFilePath)) {
+        QTranslator *translator = new QTranslator(QApplication::instance());
+        if (translator->load(qmFilePath)) {
+            QApplication::installTranslator(translator);
+        } else {
+            translator->deleteLater();
+        }
+    }
 
     m_engine = new QQmlApplicationEngine(this);
     setupCommandLineParser();

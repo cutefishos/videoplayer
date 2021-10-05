@@ -12,7 +12,7 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
-find_package(Qt5 COMPONENTS Core Quick DBus Widgets REQUIRED)
+find_package(Qt5 COMPONENTS Core Quick DBus Widgets LinguistTools REQUIRED)
 find_package(Libmpv)
 
 qt5_add_dbus_interface(screensaver_inhibit_SRCS ./org.freedesktop.ScreenSaver.xml screensaverdbusinterface)
@@ -53,3 +53,10 @@ install(FILES
     DESTINATION /usr/share/applications/
     COMPONENT Runtime
 )
+
+file(GLOB TS_FILES translations/*.ts)
+qt5_create_translation(QM_FILES ${TS_FILES})
+add_custom_target(translations DEPENDS ${QM_FILES} SOURCES ${TS_FILES})
+add_dependencies(cutefish-videoplayer translations)
+
+install(FILES ${QM_FILES} DESTINATION /usr/share/cutefish-videoplayer/translations)
